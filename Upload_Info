@@ -1,6 +1,6 @@
 Sub Deletion_of_columns()
 
-'Delets specific columns'
+'Deletes specific columns'
 Columns(1).Delete
 Columns(1).Delete
 Columns(3).Delete
@@ -17,26 +17,22 @@ Columns(4).Delete
         End If
     Next i
 
-'inserts new row above previous row 1
+'Inserts new row above previous row 1
 Rows(1).Insert Shift:=xlDown, _
       CopyOrigin:=xlFormatFromLeftOrAbove
 
-'Insert values into empty header
+'Inserts values into empty header
 Range("A1").Value = "ID_Number"
 Range("B1").Value = "Number_Value"
 Range("C1").Value = "Note"
 Range("E2").Formula = "=c2 &"" "" & TEXT(d2,""mm/dd/yyyy"")"
-'Range("E2").Formula = =c2&" "&TEXT(d2,"mm/dd/yyyy")
 
+Range("E2").Select
+Selection.Copy
+Range("E3:E50").PasteSpecial xlPasteFormulas
 
-   Range("E2").Select
-   Selection.Copy
-   Range("E3:E50").PasteSpecial xlPasteFormulas
-
-
- Dim rng As Range
-    Set rng = ActiveSheet.UsedRange
-    
+Dim rng As Range
+  Set rng = ActiveSheet.UsedRange
     For i = rng.Cells.Count To 1 Step -1
         If rng.Item(i).Value = " " Then
             rng.Item(i).EntireRow.Delete
@@ -60,7 +56,7 @@ Columns(4).Delete
 'Saves updates
 ThisWorkbook.Save
 
-'Completely closes app window. 
+'Completely closes app window 
 Application.Quit
 
 End Sub
